@@ -120,6 +120,7 @@ const setup = async() => {
 Get the signers we need, and our address.
 
 ```js
+  // The network slug is available in the Network Information tab here: https://app.conduit.xyz/published/view/conduit-opstack-demo-npsmqp41hc
   let config = await conduitSDK.getOptimismConfiguration('conduit:conduit-opstack-demo-npsmqp41hc');
   config.l1SignerOrProvider = l1Signer
   config.l2SignerOrProvider = l2Signer
