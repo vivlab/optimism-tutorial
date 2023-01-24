@@ -26,7 +26,7 @@ This tutorial teaches you how to use the [Optimism SDK](https://sdk.optimism.io/
    yarn
    ```
 
-1. Go to https://app.conduit.xyz/published/view/conduit-opstack-demo-npsmqp41hc to view the information for the OP-stack devnet
+1. Go to https://app.conduit.xyz/published/view/conduit-opstack-demo-jizjqvdzfk to view the information for the OP-stack devnet
 
 
 ## Run the sample code
@@ -66,9 +66,9 @@ The libraries we need: [`ethers`](https://docs.ethers.io/v5/), [`dotenv`](https:
 
 ```js
 // Your settlment layer rpc url here
-const l1Url = `https://l1-conduit-opstack-demo-npsmqp41hc.t.conduit.xyz`
+const l1Url = `https://l1-conduit-opstack-demo-jizjqvdzfk.t.conduit.xyz`
 // Your conduit rpc url here
-const l2Url = `https://l2-conduit-opstack-demo-npsmqp41hc.t.conduit.xyz`
+const l2Url = `https://l2-conduit-opstack-demo-jizjqvdzfk.t.conduit.xyz`
 const privateKey = process.env.PRIVATE_KEY
 ```
 
@@ -120,8 +120,8 @@ const setup = async() => {
 Get the signers we need, and our address.
 
 ```js
-  // The network slug is available in the Network Information tab here: https://app.conduit.xyz/published/view/conduit-opstack-demo-npsmqp41hc
-  let config = await conduitSDK.getOptimismConfiguration('conduit:conduit-opstack-demo-npsmqp41hc');
+  // The network slug is available in the Network Information tab here: https://app.conduit.xyz/published/view/conduit-opstack-demo-jizjqvdzfk
+  let config = await conduitSDK.getOptimismConfiguration('conduit:conduit-opstack-demo-jizjqvdzfk');
   config.l1SignerOrProvider = l1Signer
   config.l2SignerOrProvider = l2Signer
     

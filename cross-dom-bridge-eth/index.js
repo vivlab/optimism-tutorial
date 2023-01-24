@@ -11,9 +11,9 @@ require('dotenv').config()
 // here: https://app.conduit.xyz/published/view/conduit-opstack-demo-npsmqp41hc
 
 // Your settlment layer rpc url here
-const l1Url = `https://l1-conduit-opstack-demo-npsmqp41hc.t.conduit.xyz`
+const l1Url = `https://l1-conduit-opstack-demo-jizjqvdzfk.t.conduit.xyz`
 // Your conduit rpc url here
-const l2Url = `https://l2-conduit-opstack-demo-npsmqp41hc.t.conduit.xyz`
+const l2Url = `https://l2-conduit-opstack-demo-jizjqvdzfk.t.conduit.xyz`
 const privateKey = process.env.PRIVATE_KEY
 
 // Global variable because we need them almost everywhere
@@ -32,8 +32,8 @@ const getSigners = async () => {
 const setup = async() => {
   const [l1Signer, l2Signer] = await getSigners()
   addr = l1Signer.address
-  // The network slug is available in the Network Information tab here: https://app.conduit.xyz/published/view/conduit-opstack-demo-npsmqp41hc
-  let config = await conduitSDK.getOptimismConfiguration('conduit:conduit-opstack-demo-npsmqp41hc');
+  // The network slug is available in the Network Information tab here: https://app.conduit.xyz/published/view/conduit-opstack-demo-jizjqvdzfk
+  let config = await conduitSDK.getOptimismConfiguration('conduit:conduit-opstack-demo-jizjqvdzfk');
   config.l1SignerOrProvider = l1Signer
   config.l2SignerOrProvider = l2Signer
     
