@@ -8,12 +8,12 @@ const conduitSDK = require('@conduitxyz/sdk');
 require('dotenv').config()
 
 // Network information and utilities for this example network are available
-// here: https://app.conduit.xyz/published/view/conduit-opstack-demo-npsmqp41hc
+// here: https://app.conduit.xyz/published/view/conduit-opstack-demo-nhl9xsg0wg
 
 // Your settlment layer rpc url here
-const l1Url = `https://l1-conduit-opstack-demo-jizjqvdzfk.t.conduit.xyz`
+const l1Url = `https://l1-conduit-opstack-demo-nhl9xsg0wg.t.conduit.xyz`
 // Your conduit rpc url here
-const l2Url = `https://l2-conduit-opstack-demo-jizjqvdzfk.t.conduit.xyz`
+const l2Url = `https://l2-conduit-opstack-demo-nhl9xsg0wg.t.conduit.xyz`
 const privateKey = process.env.PRIVATE_KEY
 
 // Global variable because we need them almost everywhere
@@ -32,8 +32,8 @@ const getSigners = async () => {
 const setup = async() => {
   const [l1Signer, l2Signer] = await getSigners()
   addr = l1Signer.address
-  // The network slug is available in the Network Information tab here: https://app.conduit.xyz/published/view/conduit-opstack-demo-jizjqvdzfk
-  let config = await conduitSDK.getOptimismConfiguration('conduit:conduit-opstack-demo-jizjqvdzfk');
+  // The network slug is available in the Network Information tab here: https://app.conduit.xyz/published/view/conduit-opstack-demo-3druhsesa1
+  let config = await conduitSDK.getOptimismConfiguration('conduit:conduit-opstack-demo-3druhsesa1');
   config.l1SignerOrProvider = l1Signer
   config.l2SignerOrProvider = l2Signer
     
@@ -59,7 +59,8 @@ const depositETH = async () => {
   await reportBalances()
   const start = new Date()
 
-  const response = await crossChainMessenger.depositETH(eth)
+  const response = await crossChainMessenger.depositETH(eth, {
+  })
   console.log(`Transaction hash (on L1): ${response.hash}`)
   await response.wait()
   console.log("Waiting for status to change to RELAYED")

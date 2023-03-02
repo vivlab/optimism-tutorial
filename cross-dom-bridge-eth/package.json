@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@conduitxyz/sdk": "^0.0.3",
-    "@eth-optimism/sdk": "^1.10.0",
+    "@eth-optimism/sdk": "^1.10.4",
     "conduit-sdk": "^0.0.3",
     "dotenv": "^16.0.0",
     "node-fetch": "^2.6.0"
