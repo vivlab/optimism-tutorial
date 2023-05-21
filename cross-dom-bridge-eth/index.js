@@ -11,7 +11,7 @@ require('dotenv').config()
 // here: https://app.conduit.xyz/published/view/conduit-opstack-demo-nhl9xsg0wg
 
 // Your settlment layer rpc url here
-const l1Url = `https://l1-conduit-opstack-demo-nhl9xsg0wg.t.conduit.xyz`
+const l1Url = `https://eth-goerli.public.blastapi.io`
 // Your conduit rpc url here
 const l2Url = `https://l2-conduit-opstack-demo-nhl9xsg0wg.t.conduit.xyz`
 const privateKey = process.env.PRIVATE_KEY
@@ -33,7 +33,7 @@ const setup = async() => {
   const [l1Signer, l2Signer] = await getSigners()
   addr = l1Signer.address
   // The network slug is available in the Network Information tab here: https://app.conduit.xyz/published/view/conduit-opstack-demo-3druhsesa1
-  let config = await conduitSDK.getOptimismConfiguration('conduit:conduit-opstack-demo-3druhsesa1');
+  let config = await conduitSDK.getOptimismConfiguration('conduit:conduit-opstack-demo-nhl9xsg0wg');
   config.l1SignerOrProvider = l1Signer
   config.l2SignerOrProvider = l2Signer
     
@@ -59,7 +59,7 @@ const depositETH = async () => {
   await reportBalances()
   const start = new Date()
 
-  const response = await crossChainMessenger.depositETH(eth, {
+  const response = await crossChainMessenger.depositETH(gwei, {
   })
   console.log(`Transaction hash (on L1): ${response.hash}`)
   await response.wait()
@@ -73,19 +73,21 @@ const depositETH = async () => {
 }     // depositETH()
 
 const withdrawETH = async () => { 
-  
   console.log("Withdraw ETH")
   const start = new Date()  
   await reportBalances()
 
-  const response = await crossChainMessenger.withdrawETH(centieth)
+  const response = await crossChainMessenger.withdrawETH(gwei)
   console.log(`Transaction hash (on L2): ${response.hash}`)
   await response.wait()
 
-  console.log("Waiting for status to change to IN_CHALLENGE_PERIOD")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)  
+  console.log("Waiting for status to be READY_TO_PROVE")
+  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
   await crossChainMessenger.waitForMessageStatus(response.hash, 
-    optimismSDK.MessageStatus.IN_CHALLENGE_PERIOD)
+    optimismSDK.MessageStatus.READY_TO_PROVE)
+  console.log(`Time so far ${(new Date()-start)/1000} seconds`)  
+  await crossChainMessenger.proveMessage(response.hash)
+
   console.log("In the challenge period, waiting for status READY_FOR_RELAY") 
   console.log(`Time so far ${(new Date()-start)/1000} seconds`)  
   await crossChainMessenger.waitForMessageStatus(response.hash, 
@@ -105,7 +107,7 @@ const withdrawETH = async () => {
 const main = async () => {
     await setup()
     await depositETH()
-    //await withdrawETH()
+    await withdrawETH()
 }  // main
 
 
